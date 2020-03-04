@@ -10,9 +10,9 @@
 <h5><a href="{{ url('app/usuarios') }}">Usuarios </a> >> Ver usuario</h5>
 
 <div>
-  <a class="btn" href="{{ url('') }}">Negocios</a>
-  <a class="btn" href="{{ url('') }}">Recibos</a>
-  <a class="btn" href="{{ url('') }}">Direcciones</a>
+  <a class="btn" href="{{ url()->current() }}/negocios">Negocios</a>
+  <a class="btn" href="{{ url()->current() }}/recibos">Recibos</a>
+  <a class="btn" href="{{ url()->current() }}/direcciones">Direcciones</a>
 </div>
 
 <div class="row ">

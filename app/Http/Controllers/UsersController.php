@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
+use App\EnrollmentBusinessUser;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -85,5 +87,37 @@ class UsersController extends Controller
                               
     }
 
-    
+    public function businessList(Request $re, $id) {
+        $user = User::find($id);
+        $objects = Business::where('name', 'LIKE',"%$re->term%" )
+        ->whereHas('enrollmentUsers',function($query) use($id) {
+            $query->where('user_id', $id);
+        })            
+        ->paginate(15);
+    return view('app/user/businessList')->with([
+        'objects' => $objects,
+        'user' => $user,
+        ]);
+    }
+
+    public function createBusinessEnrollment($id) {
+         $obj = User::find($id);
+        return view('app/user/businessEnrollment')->with([            
+            'obj' => $obj,
+            ]);
+    }
+
+    public function storeBusinessEnrollment($id, Request $re) {
+        $check = EnrollmentBusinessUser::checkUnique($id, $re->business_id)->first();         
+        if($check != NULL)
+            return back()->with('error',"El negocio ". $check->business->name . " ya se encuentra enlazado con el usuario: " . $check->user->fullname());
+
+        $obj = new EnrollmentBusinessUser();            
+        $obj->user_id = $id;
+        $obj->business_id = $re->business_id;
+        $obj->save();
+
+        return redirect("app/usuarios/ver/$id/negocios")->with('msj', "El negocio ha sido enlazado");
+
+    }
 }

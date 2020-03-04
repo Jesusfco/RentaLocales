@@ -13,7 +13,9 @@ class EnrollmentBusinessUser extends Model
         'relacion', 
     ]; 
 
-    public function businnes(){
+    public $timestamps = false; 
+
+    public function business(){
         return $this->belongsTo('App\Business')->withDefault([
             'name' => 'Negocio Desconocido',
         ]);
@@ -22,6 +24,13 @@ class EnrollmentBusinessUser extends Model
     public function user(){
         return $this->belongsTo('App\user')->withDefault([
             'name' => 'Usuario Desconocido',
+        ]);
+    }
+
+    public function scopeCheckUnique($query, $id_user, $id_business) {
+        return $query->where([
+            ['user_id', $id_user],
+            ['business_id', $id_business],
         ]);
     }
 

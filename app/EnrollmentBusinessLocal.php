@@ -13,7 +13,9 @@ class EnrollmentBusinessLocal extends Model
         'is_occupped', 
     ]; 
 
-    public function businnes(){
+    public $timestamps = false; 
+
+    public function business(){
         return $this->belongsTo('App\Business')->withDefault([
             'name' => 'Negocio Desconocido',
         ]);
@@ -23,5 +25,12 @@ class EnrollmentBusinessLocal extends Model
         return $this->belongsTo('App\Local')->withDefault([
             'description' => 'local Desconocido',
         ]);
+    }
+
+    public function scopeCheckUnique($query, $id_local, $id_business) {
+        return $query->where([
+            ['local_id', $id_local],
+            ['business_id', $id_business],
+        ])->first();
     }
 }

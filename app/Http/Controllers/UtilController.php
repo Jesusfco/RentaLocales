@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +28,15 @@ class UtilController extends Controller
 
     public function dashboard() {
         return view('app/dashboard');
+    }
+
+    public function getBusinessSugest(Request $re) {
+        return response()->json(
+            Business::name($re->term)->formatSujest()->limit(10)->get()
+        );
+    }
+
+    public function getUsersLesseeSugest(Request $re) {
+
     }
 }
