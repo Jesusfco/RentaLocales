@@ -20,6 +20,7 @@ Route::prefix('app')->group(function () {
 
     Route::get('/sugest/business', 'UtilController@getBusinessSugest');
     Route::get('/sugest/lessee', 'UtilController@getUsersLesseeSugest');
+    Route::get('/sugest/locals', 'UtilController@getLocalSugest');
 
     
 
@@ -35,7 +36,7 @@ Route::prefix('app')->group(function () {
         Route::get('ver/{id}/negocios', 'UsersController@businessList');
         Route::get('ver/{id}/enlazar-negocio', 'UsersController@createBusinessEnrollment');
         Route::post('ver/{id}/enlazar-negocio', 'UsersController@storeBusinessEnrollment');
-
+        Route::get('ver/{user_id}/negocios/delete/{business_id}', 'UsersController@deleteBusinessEnrollment');       
         
     });
 
@@ -47,6 +48,11 @@ Route::prefix('app')->group(function () {
         Route::get('create', 'LocalController@create');
         Route::post('create', 'LocalController@store');            
         Route::get('delete/{id}', 'LocalController@delete');   
+
+        Route::get('ver/{id}/asignar-negocio', 'LocalController@enrollBusiness');   
+        Route::post('ver/{id}/asignar-negocio', 'LocalController@storeEnrollBusiness');   
+        Route::get('ver/{id}/historial-negocios', 'LocalController@business');   
+        Route::get('ver/{number}/historial-negocios/delete/{business_id}', 'LocalController@deleteBusinessEnroll');   
     });
 
     Route::prefix('negocios')->group(function () { 
@@ -60,6 +66,15 @@ Route::prefix('app')->group(function () {
         Route::get('create', 'BusinessController@create');
         Route::post('create', 'BusinessController@store');            
         Route::get('delete/{id}', 'BusinessController@delete');   
+
+        Route::get('ver/{id}/locales', 'BusinessController@localList');
+        Route::get('ver/{business_id}/locales/delete/{local_id}', 'BusinessController@deleteEnrollmentLocal');
+        Route::get('ver/{id}/enlazar-local', 'BusinessController@enrollLocal');
+        Route::post('ver/{id}/enlazar-local', 'BusinessController@storeEnrollLocal');
+        Route::get('ver/{id}/enlazar-usuario', 'BusinessController@enrollUser');
+        Route::get('ver/{id}/usuarios', 'BusinessController@users');
+        Route::get('ver/{business_id}/usuarios/delete/{user_id}', 'BusinessController@deleteEnrollUser');
+        Route::post('ver/{id}/enlazar-usuario', 'BusinessController@storeEnrollUser');
     });
 
     Route::prefix('perfil')->group(function () { 

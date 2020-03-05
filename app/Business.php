@@ -18,6 +18,39 @@ class Business extends Model
         return $this->hasMany('App\Receipt');
     }
 
+    public function delete() {
+        EnrollmentBusinessLocal::where('business_id', $this->id)->delete();
+        EnrollmentBusinessUser::where('business_id', $this->id)->delete();
+        return parent::delete();
+    }
+
+    public function users(){
+        return $this->hasManyThrough(
+            'App\User',
+            'App\EnrollmentBusinessUser', //Inter table
+            'business_id', // Foreign key on INTER table...
+            'id', // Foreign key on FINAL table...
+            'id', // Local key on THIS model table...
+            'user_id' // Local key on INTER table...
+            
+        );
+    }
+
+    
+    public function locals(){
+        return $this->hasManyThrough(
+            'App\Local',
+            'App\EnrollmentBusinessLocal', //Inter table
+            'business_id', // Foreign key on INTER table...
+            'number', // Foreign key on FINAL table...
+            'id', // Local key on THIS model table...
+            'local_id' // Local key on INTER table...
+            
+        );
+    }
+
+
+
     public function enrollmentUsers() {
         return $this->hasMany('App\EnrollmentBusinessUser');
     }

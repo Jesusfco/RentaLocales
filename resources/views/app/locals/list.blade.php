@@ -23,7 +23,7 @@
             {{-- <th>ID</th> --}}
             <th>Numero de Local</th>            
             <th>Descripción</th>            
-            {{-- <th>Teléfono 1</th> --}}
+            <th>Estatus</th>
             {{-- <th>Tipo</th>             --}}
             <th>Acciones</th>
         </thead>
@@ -32,7 +32,8 @@
         
         <tr id="id{{$n->number}}">            
             <td>{{ $n->number }}</td>
-            <td>{{ $n->description_resume() }}</td>
+            <td>{{ $n->description }}</td>
+            <td>{!! $n->statusView() !!}</td>
             {{-- <td>{{ $n-> }}</td>            
             <td>{{ $n-> }}</td>             --}}
             

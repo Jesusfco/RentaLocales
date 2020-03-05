@@ -53,4 +53,16 @@ class User extends Authenticatable
         return $query->where(DB::raw("CONCAT(`name`, ' ', IFNULL(`patern`, ''), ' ', IFNULL(`matern`, ''))"), 'LIKE', '%' . $name . '%');
     }
 
+    public function business(){
+        return $this->hasManyThrough(
+            'App\Business',
+            'App\EnrollmentBusinessUser', //Inter table
+            'user_id', // Foreign key on INTER table...
+            'id', // Foreign key on FINAL table...
+            'id', // Local key on THIS model table...
+            'business_id' // Local key on INTER table...
+            
+        );
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\Local;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,5 +39,11 @@ class UtilController extends Controller
 
     public function getUsersLesseeSugest(Request $re) {
 
+    }
+
+    public function getLocalSugest(Request $re) {
+        return response()->json(
+            Local::where('number', 'LIKE', "%$re->term%")->formatSujest()->limit(10)->get()
+        );
     }
 }

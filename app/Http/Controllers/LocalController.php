@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EnrollmentBusinessLocal;
 use App\Local;
 use Illuminate\Http\Request;
 
@@ -50,7 +51,10 @@ class LocalController extends Controller
             if($check->number != $id) 
                 return back()->with('error', 'Numero repetido #"'. $re->number . '" - No se puede tener mas de un local con el mismo Numero');
 
-        $this->pushData($re, $obj);                   
+        $this->pushData($re, $obj); 
+        
+        EnrollmentBusinessLocal::where('local_id', $id)->update(['local_id' => $obj->number]);
+
         return redirect('app/locales/edit/' . $obj->number)->with('success', 'Se ha actualizado el local con exito');        
 
     }
@@ -68,5 +72,31 @@ class LocalController extends Controller
         $obj->description = $re->description;
         $obj->save();
                               
+    }
+    public function business(Request $re, $id) {
+
+        $obj = Local::find($id);
+        $objects = EnrollmentBusinessLocal::with('business')
+                    ->where('local_id', $id)
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(15);
+
+                    // return "hola";
+        return view('app/locals/business')->with([
+            'obj' => $obj,
+            'objects' => $objects,
+            ]);
+
+    }
+
+    public function deleteBusinessEnroll($number, $business_id) {
+        $obj = EnrollmentBusinessLocal::checkUnique($number, $business_id)->first();
+        $obj->delete();
+        return 'true';
+    }
+
+    public function enrollBusiness($id) {
+        $obj = Local::find($id);
+        return view('app/locals/enrollBusiness')->with('obj', $obj);
     }
 }

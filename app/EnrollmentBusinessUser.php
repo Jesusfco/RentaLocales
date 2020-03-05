@@ -2,18 +2,22 @@
 
 namespace App;
 
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
 class EnrollmentBusinessUser extends Model
 {
-
+    public $timestamps = false; 
     protected $fillable = [
         'business_id', 
         'user_id', 
         'relacion', 
     ]; 
+    // protected $primaryKey = 'user_id';
 
-    public $timestamps = false; 
+    public function delete() {
+        EnrollmentBusinessUser::checkUnique($this->user_id, $this->business_id)->delete();
+    }    
 
     public function business(){
         return $this->belongsTo('App\Business')->withDefault([

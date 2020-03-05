@@ -120,4 +120,12 @@ class UsersController extends Controller
         return redirect("app/usuarios/ver/$id/negocios")->with('msj', "El negocio ha sido enlazado");
 
     }
+
+    public function deleteBusinessEnrollment($user_id, $business_id) { 
+
+        $obj = EnrollmentBusinessUser::checkUnique($user_id, $business_id)->first();
+        $obj->delete();
+        return 'true';
+
+    }
 }

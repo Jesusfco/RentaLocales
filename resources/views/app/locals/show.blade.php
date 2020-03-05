@@ -11,19 +11,21 @@
 
 <div>
   <a class="btn" href="{{ url()->current() . "/historial-negocios" }}">Historial Negocios</a>    
+  <a class="btn" href="{{ url()->current() . "/asignar-negocio" }}">Asignar Negocio</a>    
 </div>
 
 <div class="row ">
     
     <div class="col l12 s12">
 
-        <div class="form-group col l12">
-            <label for="exampleInputEmail1">Numero de Local: </label>
-            <h3 disabled>#{{ $obj->number }}</h3>
+        <div class="form-group col l6 s12">            
+            <p disabled>Numero de Local: #{{ $obj->number }}</p>
           </div>
-          <div class="form-group col l12">
-            <label for="exampleInputEmail1">Descripción: </label>
-            <p>{{ $obj->description }}</p>
+          <div class="form-group col l6 s12">            
+            <p>Descripción: {{ $obj->description }}</p>
+          </div>
+          <div class="form-group col l6 s12">            
+            <p>Estatus: {!! $obj->statusView() !!}</p>
           </div>
           
 

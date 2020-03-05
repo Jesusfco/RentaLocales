@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\EnrollmentBusinessLocal;
+use App\EnrollmentBusinessUser;
 use App\MonthlyPayment;
 use Illuminate\Http\Request;
 
@@ -32,9 +34,9 @@ class BusinessController extends Controller
         $this->pushData($re, $obj);       
         
         $monthly = new MonthlyPayment();
-        $monthly->businnes_id = $obj->id;
-        $monthly->amount = $obj->amount;
-        $monthly->businnes_id = $obj->date_to_pay;
+        $monthly->business_id = $obj->id;
+        $monthly->amount = $re->amount;
+        $monthly->date_to_pay = $re->date_to_pay;
         $monthly->save();
         
         return redirect('app/negocios/ver/' . $obj->id)->with('msj', 'Se ha creado un negocio con exito');
@@ -109,5 +111,63 @@ class BusinessController extends Controller
         'objects' => $objects,
         'business' => $business,
         ]);
+    }
+
+    public function localList($id){
+        $obj = Business::find($id);
+        return view('app/business/locales')->with('obj', $obj);
+    }
+
+    public function deleteEnrollmentLocal($business_id, $local_id){
+        
+        $obj = EnrollmentBusinessLocal::checkUnique($local_id, $business_id)->first();
+        $obj->delete();
+        return 'true';
+
+    }
+
+    public function enrollLocal($id){
+        $obj = Business::find($id);
+        return view('app/business/enlazarLocal')->with('obj', $obj);
+    }
+
+    public function storeEnrollLocal($id, Request $re){
+
+        $check = EnrollmentBusinessLocal::checkUnique($re->targetId, $id)->first();         
+        if($check != NULL)
+            return back()->with('error',"El negocio ". $check->business->name . " ya se encuentra enlazado con el local: " . $check->local->number);
+
+        $obj = new EnrollmentBusinessLocal();            
+        $obj->business_id = $id;
+        $obj->local_id = $re->targetId;
+        $obj->is_occupied = true;
+        $obj->save();
+
+        return redirect("app/negocios/ver/$id/locales")->with('msj', "El negocio ha sido enlazado");
+
+    }
+
+    public function enrollUser($id) {
+        $obj = Business::find($id);
+        return view('app/business/enlazarUsuario')->with('obj', $obj);
+    }
+
+    public function storeEnrollUser($id, Request $re) {
+
+        $check = EnrollmentBusinessUser::checkUnique($re->targetId, $id)->first();         
+        if($check != NULL)
+            return back()->with('error',"El Usuario ". $check->user->fullname() . " ya se encuentra enlazado.");
+
+        return redirect("app/negocios/ver/$id/usuarios")->with('msj', "El Usuario ". $check->user->fullname() . " ha sido enlazado");
+        
+    }
+
+    public function users(Request $re, $id) {
+        $business = Business::find($id);
+        $users = EnrollmentBusinessUser::where('business_id', $id)->with('user')->get();
+        return view('app/business/users')->with([
+            'business' => $business,
+            'users' => $users,
+            ]);
     }
 }
