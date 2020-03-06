@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Receipt extends Model
@@ -17,6 +18,21 @@ class Receipt extends Model
         'description'
     ];
 
+    public function description() {
+        
+        if($this->type == 1) {
+            $date = new Carbon($this->created_at);
+            $date->setMonth($this->month);
+            return "Mensualidad $date->englishMonth - $this->year" ;
+        }
+
+        else if($this->type == 2)
+            return "Deposito";
+
+        return "";
+
+    }
+
     public function user(){
         return $this->belongsTo('App\user')->withDefault([
             'name' => 'Usuario Desconocido',
@@ -29,7 +45,7 @@ class Receipt extends Model
         ]);
     }
 
-    public function businnes(){
+    public function business(){
         return $this->belongsTo('App\Business')->withDefault([
             'name' => 'Negocio Desconocido',
         ]);

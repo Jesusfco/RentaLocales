@@ -40,6 +40,18 @@ Route::prefix('app')->group(function () {
         
     });
 
+    Route::prefix('recibos')->group(function () { 
+        
+        Route::get('', 'ReceiptController@list');
+        Route::get('ver/{id}', 'ReceiptController@show');
+        Route::get('edit/{id}', 'ReceiptController@edit');
+        Route::post('edit/{id}', 'ReceiptController@update');
+        Route::get('create', 'ReceiptController@create');
+        Route::post('create', 'ReceiptController@store');            
+        Route::get('delete/{id}', 'ReceiptController@delete');   
+                    
+    });
+
     Route::prefix('locales')->group(function () { 
         Route::get('', 'LocalController@list');
         Route::get('ver/{id}', 'LocalController@show');
