@@ -49,10 +49,22 @@ class Business extends Model
         );
     }
 
-
+    public function getLocalsView(){
+        $string = '';
+        foreach($this->enrollmentLocals as $enroll)
+            $string .= "#$enroll->local_id ";
+        return $string;
+    }
 
     public function enrollmentUsers() {
         return $this->hasMany('App\EnrollmentBusinessUser');
+    }
+
+    public function localsOcuppied() {
+        return $this->hasMany('App\EnrollmentBusinessLocal')->where('is_occupied', true);
+    }
+    public function enrollmentLocals() {
+        return $this->hasMany('App\EnrollmentBusinessLocal');
     }
 
     public function monthly_payments() {
@@ -64,7 +76,9 @@ class Business extends Model
     }
 
     public function last_receipt() {
-        return $this->hasOne('App\Receipt')->latest();
+        return $this->hasOne('App\Receipt')->withDefault([
+            'created_at' => NULL,
+        ])->latest();
     }
 
     public function scopeName($query, $name) {
