@@ -28,12 +28,12 @@
     </div>  
 
     <div class="form-group col l6">
-      <label for="exampleInputEmail1">Monto: </label>
+      <label for="exampleInputEmail1">Mensualidad *: </label>
       <input type="number" name="amount" value="{{old('amount')}}" class="materialize-textarea" placeholder="Descripción del local" required>
     </div>  
 
     <div class="form-group col l6">
-      <label for="exampleInputEmail1">Día de pago: </label>
+      <label for="exampleInputEmail1">Día de pago *: </label>
     <input type="number" value="@if(old('date_to_pay')) {{old('date_to_pay')}}@else 15 @endif" name="date_to_pay"  class="materialize-textarea" placeholder="Descripción del local" max="28" min="1" required>
     </div>  
          

@@ -52,4 +52,14 @@ class ReceiptController extends Controller
         return redirect('app/recibos')->with('msj', $receipt->description() . " ha sido guardado");
 
     }
+
+    public function show($id){
+        $receipt = Receipt::find($id);
+        return view('app/receipts/show')->with('receipt', $receipt);
+    }
+
+    public function delete($id) {
+        Receipt::delete($id);
+        return "true";
+    }
 }
