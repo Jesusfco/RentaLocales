@@ -87,8 +87,8 @@ google.charts.load('current', {'packages':['corechart']});
  
 		var data = google.visualization.arrayToDataTable([
             ['Estatus de Negocio', '#'],
-			['Locales Pendientes', {{ count($businessPend) }} ],
 			['Negocios Al corriente', {{ count($businessNormal) }} ],			
+			['Locales Pendientes', {{ count($businessPend) }} ],
 		]);
  
  
@@ -102,8 +102,8 @@ google.charts.load('current', {'packages':['corechart']});
 
         var data = google.visualization.arrayToDataTable([
             ['Mensualidades', 'Dinero'],
-			['Por Cobrar', {{ $moneyPend}} ],
 			['Cobrado', {{ $moneyPayed }} ],			
+			['Por Cobrar', {{ $moneyPend}} ],
 		]);
  
  
