@@ -96,6 +96,14 @@
       this.month = date.getMonth() + 1
       this.year = date.getFullYear()
 
+
+      @if(Request::get('id'))
+      setTimeout(() => {
+        this.business_id = {{Request::get('id')}} 
+        this.setBusiness()
+      },1000)
+        
+       @endif
     },
 
     methods: {
@@ -107,6 +115,11 @@
 
         this.amount = 0
 
+        this.setBusiness()
+        
+      },
+
+      setBusiness() {
         for(let bus of this.business)
           if(bus.id == this.business_id) {
             this.businessSelected = bus;
@@ -114,7 +127,8 @@
               this.amount = bus.current_monthly.amount
             break;
           }
-        
+
+          this.intervalViewMonth()
       },
       checkType() {
         this.intervalViewMonth()

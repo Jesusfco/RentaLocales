@@ -28,6 +28,7 @@
                     <th>Local</th>            
                     <th>Día de pago</th>            
                     <th>Ultimo Pago</th>                   
+                    <th>Generar Recibo</th>                   
                 </thead>
                 <tbody>
                 @foreach($businessPend as $n)
@@ -38,7 +39,10 @@
                     <td>{{ $n->getLocalsView() }}</td>
                     <td>{{ $n->currentMonthly->date_to_pay }}</td>
                     <td>{{ $n->last_receipt->created_at }}</td>            
-                
+                    <td>
+                        <a class="btn blue" 
+                        href="{{url('app/recibos/create?id=' . $n->id )}}"><i class="material-icons">monetization_on</i></a>
+                    </td>           
                 </tr>
                 
                 @endforeach
@@ -63,7 +67,8 @@
                         {{ $n->name }}</a></td>
                     <td>{{ $n->getLocalsView() }}</td>
                     <td>{{ $n->currentMonthly->date_to_pay }}</td>
-                    <td>{{ $n->last_receipt->created_at }}</td>            
+                    <td>{{ $n->last_receipt->created_at }}</td> 
+                    
                 
                 </tr>
                 
