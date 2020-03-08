@@ -14,6 +14,7 @@
 Route::get('/', 'UtilController@login');
 Route::post('/', 'UtilController@signIn');
 
+// Route::middleware('auth')->group(function () {
 Route::prefix('app')->group(function () {  
 
     Route::get('/', 'UtilController@dashboard');
@@ -80,13 +81,17 @@ Route::prefix('app')->group(function () {
         Route::get('delete/{id}', 'BusinessController@delete');   
 
         Route::get('ver/{id}/locales', 'BusinessController@localList');
-        Route::get('ver/{business_id}/locales/delete/{local_id}', 'BusinessController@deleteEnrollmentLocal');
+        Route::get('ver/{id}/recibos', 'BusinessController@receipts');        
+        Route::get('ver/{id}/usuarios', 'BusinessController@users');
+
         Route::get('ver/{id}/enlazar-local', 'BusinessController@enrollLocal');
         Route::post('ver/{id}/enlazar-local', 'BusinessController@storeEnrollLocal');
         Route::get('ver/{id}/enlazar-usuario', 'BusinessController@enrollUser');
-        Route::get('ver/{id}/usuarios', 'BusinessController@users');
-        Route::get('ver/{business_id}/usuarios/delete/{user_id}', 'BusinessController@deleteEnrollUser');
         Route::post('ver/{id}/enlazar-usuario', 'BusinessController@storeEnrollUser');
+
+        Route::get('ver/{business_id}/recibos/delete/{receipt_id}', 'BusinessController@deleteReceipt');
+        Route::get('ver/{business_id}/locales/delete/{local_id}', 'BusinessController@deleteEnrollmentLocal');
+        Route::get('ver/{business_id}/usuarios/delete/{user_id}', 'BusinessController@deleteEnrollUser');
     });
 
     Route::prefix('perfil')->group(function () { 
@@ -97,4 +102,5 @@ Route::prefix('app')->group(function () {
         Route::post('password', 'PerfilController@passwordUpdate');
     });
 
-});
+}); #PREFIX GROUP
+// });//MIDDLEWARE 

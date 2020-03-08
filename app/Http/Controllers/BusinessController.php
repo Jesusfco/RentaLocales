@@ -6,10 +6,18 @@ use App\Business;
 use App\EnrollmentBusinessLocal;
 use App\EnrollmentBusinessUser;
 use App\MonthlyPayment;
+use App\Receipt;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('myAuth');
+        $this->middleware('admin');
+    }
+    
     public function list(Request $re) {
 
         $objects = Business::where('name', 'LIKE',"%$re->term%" )
@@ -126,6 +134,19 @@ class BusinessController extends Controller
 
     }
 
+    public function deleteEnrollmentUser($business_id, $user_id){
+        
+        $obj = EnrollmentBusinessUser::checkUnique($user_id, $business_id)->first();
+        $obj->delete();
+        return 'true';
+
+    }
+
+    public function deleteReceipt($receipt_id) {
+        $obj = Receipt::find($receipt_id);
+        $obj->delete();
+        return 'true';
+    }
     public function enrollLocal($id){
         $obj = Business::find($id);
         return view('app/business/enlazarLocal')->with('obj', $obj);
@@ -164,10 +185,23 @@ class BusinessController extends Controller
 
     public function users(Request $re, $id) {
         $business = Business::find($id);
-        $users = EnrollmentBusinessUser::where('business_id', $id)->with('user')->get();
+        $users = EnrollmentBusinessUser::where('business_id', $id)->with('user')->paginate(20);
         return view('app/business/users')->with([
-            'business' => $business,
-            'users' => $users,
+            'obj' => $business,
+            'objects' => $users,
             ]);
     }
+
+    public function receipts($id) {
+        
+        $obj = Business::find($id);
+        $objects = Receipt::where('business_id', $id)->orderBy('created_at', 'DESC')->paginate(20);
+
+        return view('app/business/receipts')->with([
+            'obj' => $obj,
+            'objects' => $objects
+            ]);
+
+    }
+
 }

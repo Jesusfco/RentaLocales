@@ -47,6 +47,9 @@
         @endforeach
     </tbody>
     </table>
+
+    {{ $objects->links() }}
+    
 @endsection
 
 @section('scripts')

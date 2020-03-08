@@ -20,7 +20,7 @@
         <nav class="blue darken-4 lighten-1" role="navigation">
                 <div class="nav-wrapper container">
                   <a id="logo-container" href="{{ url('')}}" class="brand-logo">
-                    <h5>Panel | VisionReal</h5>
+                    <h5>Locales Abuela</h5>
                     {{-- <img src="{{ url('img/logo2.png')}}" height="63px;"> --}}
                   </a>
                   <ul class="right hide-on-med-and-down">
@@ -36,6 +36,7 @@
                   </ul>
             
                   <ul id="nav-mobile" class="sidenav">
+                    <li><h4 class="black-color">Locales Abuela</h4></li>
                     <li><a href="{{ url('app') }}">Inicio</a></li>
                     @if(Auth::user()->user_type_id >= 9)
                     <li><a href="{{ url('app/usuarios') }}">Usuarios</a></li>

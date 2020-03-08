@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ReceiptController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('myAuth');
+        $this->middleware('admin');
+    }
+    
     public function list(Request $re) {
         $receipts = Receipt::orderBy('created_at', 'DESC')->with('business')->paginate(15);
         return view('app/receipts/list')->with([

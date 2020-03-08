@@ -10,9 +10,9 @@
 <h5><a href="{{ url('app/negocios') }}">Negocios </a> / {{ $obj->name }}</h5>
 
 <div>
-  <a class="btn" href="{{ url()->current() . "/historial-recibos" }}">Historial recibos</a>    
-  <a class="btn" href="{{ url()->current() . "/mensualidades" }}">Historial Pagos Mensuales</a>    
-  <a class="btn" href="{{ url()->current() . "/nueva-mensualidad" }}">Establecer Nuevo Pago Mensual</a>    
+  <a class="btn green" href="{{ url()->current() . "/recibos" }}">Recibos</a>    
+  <a class="btn green" href="{{ url()->current() . "/mensualidades" }}">Historial Mensualidades</a>    
+  <a class="btn orange" href="{{ url()->current() . "/nueva-mensualidad" }}">Nuevo Mensualidad</a>    
 </div>
 
 <div class="row "> 
@@ -43,7 +43,7 @@
           
 
     <div class="col l6">
-      <h5>Usuario Enlazados</h5>
+      <h5><a href="{{url()->current()}}/usuarios">Usuario Enlazados</a></h5>
       
       <div class="collection">
         @foreach($obj->users as $user)
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col l6">
-      <h5>Locales Enlazados</h5>
+      <h5><a href="{{url()->current()}}/locales">Locales Enlazados</a></h5>
       
       @if( count( $obj->locals ) > 0 )
 

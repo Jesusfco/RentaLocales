@@ -35,7 +35,7 @@
             <td>{{ $n->description() }}</td>            
             <td>
                 
-                <a href="{{ url('app/recibos/edit', $n->id) }}" class="btn yellow">Editar </a>
+                {{-- <a href="{{ url('app/recibos/edit', $n->id) }}" class="btn yellow">Editar </a> --}}
                 <a  onclick="eliminar({{ $n->id }}, '{{ $n->description() }}')" class="btn red"> Eliminar</a>
                 <a href="{{ url('app/recibos/ver', $n->id) }}" class="btn green">Ver</a>
             </td>
@@ -44,6 +44,8 @@
         @endforeach
     </tbody>
     </table>
+
+    {{ $receipts->links() }}
 @endsection
 
 @section('scripts')

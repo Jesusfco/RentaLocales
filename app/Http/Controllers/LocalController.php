@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class LocalController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('myAuth');
+        $this->middleware('admin');
+    }
+    
     public function list(Request $re) {
 
         $objects = Local::orderBy('number','asc')            
