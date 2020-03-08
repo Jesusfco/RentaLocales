@@ -49,7 +49,7 @@
     </tbody>
     </table>
 
-    {{ $objects->links() }}
+    {{-- {{ $objects->links() }} --}}
 @endsection
 
 @section('scripts')

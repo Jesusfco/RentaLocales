@@ -46,7 +46,7 @@ class Business extends Model
             'id', // Local key on THIS model table...
             'local_id' // Local key on INTER table...
             
-        );
+        )->where('is_occupied', true);
     }
 
     public function getLocalsView(){

@@ -24,6 +24,7 @@
             <th>Nombre</th>            
             <th>Tipo</th>            
             <th>Dueño/s</th>
+            <th>Local/es</th>
             {{-- <th>Tipo</th>             --}}
             <th>Acciones</th>
         </thead>
@@ -33,6 +34,7 @@
         <tr id="id{{$n->id}}">            
             <td>{{ $n->name }}</td>
             <td>{{ $n->type }}</td>
+            <td>{{ "" }}</td>            
             <td>{{ "" }}</td>            
             
             

@@ -154,9 +154,15 @@ class BusinessController extends Controller
 
     public function storeEnrollLocal($id, Request $re){
 
-        $check = EnrollmentBusinessLocal::checkUnique($re->targetId, $id)->first();         
+        $check = EnrollmentBusinessLocal::checkUnique($re->targetId, $id)->where('is_occupied', true)->first();         
         if($check != NULL)
             return back()->with('error',"El negocio ". $check->business->name . " ya se encuentra enlazado con el local: " . $check->local->number);
+
+        $lastOccupied = EnrollmentBusinessLocal::where('is_occupied', true)->first();
+
+        EnrollmentBusinessLocal::where('is_occupied', true)->update(['is_occupied' => false]);
+        $lastOccupied->is_occupied = false;
+        
 
         $obj = new EnrollmentBusinessLocal();            
         $obj->business_id = $id;
@@ -164,7 +170,8 @@ class BusinessController extends Controller
         $obj->is_occupied = true;
         $obj->save();
 
-        return redirect("app/negocios/ver/$id/locales")->with('msj', "El negocio ha sido enlazado");
+        return redirect("app/negocios/ver/$id/locales")->with('msj', "El negocio ha sido enlazado, el negocio " . $lastOccupied->business->name  . 
+        " ya no se encuentra enlazado a este local");
 
     }
 
