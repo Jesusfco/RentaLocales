@@ -14,6 +14,11 @@ class UtilController extends Controller
         return view('auth/login');
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect('/')->with('msj', 'Tu sesion ha sido cerrada');
+    }
+
     public function signIn(Request $re){
         $credentials = $re->only('email', 'password');
 

@@ -31,7 +31,7 @@ class UsersController extends Controller
     public function store(Request $re) {        
         $check = NULL;
         if( $re->email != NULL)
-            $check = User::where('email', 'LIKE', $re->email)->get();        
+            $check = User::where('email', 'LIKE', $re->email)->first();        
         if($check != NULL) 
             return back()
             ->with('error', 'Correo repetido "'. $re->email . '" - No se puede crear otro usuario con el mismo correo')

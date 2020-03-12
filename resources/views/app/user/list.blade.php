@@ -8,7 +8,7 @@
 @section('content')
 
 <h5>Usuarios >> Lista</h5>
-<a href="{{ url('app/usuarios/create') }}"><button class="btn">Crear Usuario</button></a>
+<a href="{{ url('app/usuarios/create') }}"><button class="btn orange">Crear Usuario</button></a>
 
 <form method="GET" class="navbar-form">
         <div class="input-field">
@@ -38,9 +38,9 @@
             
             <td>
                 
-                <a href="{{ url('app/usuarios/edit/'.$n->id.'') }}" class="btn yellow">Editar </a>
-                <a  onclick="eliminar({{ $n->id }}, '{{ $n->name }}')" class="btn red"> Eliminar</a>
+                <a href="{{ url('app/usuarios/edit/'.$n->id.'') }}" class="btn blue">Editar </a>
                 <a href="{{ url('app/usuarios/ver', $n->id) }}" class="btn green">Ver</a>
+                <a  onclick="eliminar({{ $n->id }}, '{{ $n->name }}')" class="btn red"> Eliminar</a>
             </td>
         </tr>
         

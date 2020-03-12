@@ -8,7 +8,7 @@
 @section('content')
 
 <h5>Locales / Lista</h5>
-<a href="{{ url('app/locales/create') }}"><button class="btn">Crear Local</button></a>
+<a href="{{ url('app/locales/create') }}"><button class="btn orange">Crear Local</button></a>
 
 {{-- <form method="GET" class="navbar-form">
         <div class="input-field">
@@ -39,9 +39,9 @@
             
             <td>
                 
-                <a href="{{ url('app/locales/edit/'.$n->number.'') }}" class="btn yellow">Editar </a>
-                <a  onclick="eliminar({{ $n->number }}, '{{ $n->description }}')" class="btn red"> Eliminar</a>
+                <a href="{{ url('app/locales/edit/'.$n->number.'') }}" class="btn blue">Editar </a>
                 <a href="{{ url('app/locales/ver', $n->number) }}" class="btn green">Ver</a>
+                <a  onclick="eliminar({{ $n->number }}, '{{ $n->description }}')" class="btn red"> Eliminar</a>
             </td>
         </tr>
         

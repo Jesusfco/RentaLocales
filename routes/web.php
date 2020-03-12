@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'UtilController@login');
+Route::get('/logout', 'UtilController@logout');
 Route::post('/', 'UtilController@signIn');
 
 // Route::middleware('auth')->group(function () {

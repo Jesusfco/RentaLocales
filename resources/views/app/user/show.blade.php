@@ -10,6 +10,7 @@
 <h5><a href="{{ url('app/usuarios') }}">Usuarios </a> >> Ver usuario</h5>
 
 <div>
+  <a class="btn" href="{{ url('app/usuarios/edit', $obj->id) }}">Editar</a>
   <a class="btn" href="{{ url()->current() }}/negocios">Negocios</a>
   <a class="btn" href="{{ url()->current() }}/recibos">Recibos</a>
   <a class="btn" href="{{ url()->current() }}/direcciones">Direcciones</a>

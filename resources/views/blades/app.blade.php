@@ -31,7 +31,7 @@
                     <li><a href="{{ url('app/recibos') }}">Recibos</a></li>
                     <li><a href="{{ url('app/locales') }}">Locales</a></li>
                     <li><a href="{{ url('app/negocios') }}">Negocios</a></li>
-                    <li><a href="{{ url('app/perfil') }}">Mi Perfil</a></li>
+                    {{-- <li><a href="{{ url('app/perfil') }}">Mi Perfil</a></li> --}}
                     <li><a href="{{ url('logout') }}">Cerrar Sesión</a></li>
                   </ul>
             

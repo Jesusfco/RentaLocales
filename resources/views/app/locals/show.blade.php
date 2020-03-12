@@ -10,6 +10,7 @@
 <h5><a href="{{ url('app/locales') }}">Locales </a> / Ver Local {{ $obj->number }}</h5>
 
 <div>
+  <a class="btn" href="{{ url('app/locales/edit', $obj->number)}}">Editar</a>    
   <a class="btn" href="{{ url()->current() . "/historial-negocios" }}">Historial Negocios</a>    
   <a class="btn" href="{{ url()->current() . "/asignar-negocio" }}">Asignar Negocio</a>    
 </div>

@@ -7,7 +7,7 @@
 
 @section('content')
 
-<h5><a href="{{ url('app/negocios') }}">Locales </a> >> Editar Negocio {{ $obj->name }}</h5>
+<h5><a href="{{ url('app/negocios') }}">Negocios </a> >> Editar Negocio {{ $obj->name }}</h5>
 
 <form class="row" role="form" method="POST" enctype="multipart/form-data" >
   {{ csrf_field() }}

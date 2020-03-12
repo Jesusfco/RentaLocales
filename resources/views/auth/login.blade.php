@@ -15,7 +15,7 @@
 
 @section('content')
 
-<div class="spaceLogin ">
+<div class="spaceLogin container">
 
     <div class="container2 loginCard  card">
         <div class="container"></div>

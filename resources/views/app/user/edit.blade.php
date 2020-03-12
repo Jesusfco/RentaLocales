@@ -47,10 +47,10 @@
 
     <div class="form-group col l6">
       <label>Tipo de Usuario</label>
-      <select name="user_type" class="browser-default">        
+      <select name="user_type_id" class="browser-default">        
          
-        <option value="1" @if($obj->user_type == 1) selected @endif>Arrendatario</option>        
-        <option value="9" @if($obj->user_type == 9) selected @endif>Arrendador</option>        
+        <option value="1" @if($obj->user_type_id == 1) selected @endif>Arrendatario</option>        
+        <option value="9" @if($obj->user_type_id == 9) selected @endif>Arrendador</option>        
       </select>
     </div>
     

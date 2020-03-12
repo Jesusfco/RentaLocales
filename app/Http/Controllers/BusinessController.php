@@ -161,7 +161,7 @@ class BusinessController extends Controller
         $lastOccupied = EnrollmentBusinessLocal::where('is_occupied', true)->first();
 
         EnrollmentBusinessLocal::where('is_occupied', true)->update(['is_occupied' => false]);
-        $lastOccupied->is_occupied = false;
+        
         
 
         $obj = new EnrollmentBusinessLocal();            
@@ -170,6 +170,9 @@ class BusinessController extends Controller
         $obj->is_occupied = true;
         $obj->save();
 
+        if($lastOccupied == NULL)
+            return redirect("app/negocios/ver/$id/locales")->with('msj', "El negocio ha sido enlazado");
+        
         return redirect("app/negocios/ver/$id/locales")->with('msj', "El negocio ha sido enlazado, el negocio " . $lastOccupied->business->name  . 
         " ya no se encuentra enlazado a este local");
 

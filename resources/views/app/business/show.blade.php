@@ -10,6 +10,7 @@
 <h5><a href="{{ url('app/negocios') }}">Negocios </a> / {{ $obj->name }}</h5>
 
 <div>
+  <a class="btn green" href="{{ url('app/negocios/edit', $obj->id)}}">Editar</a>    
   <a class="btn green" href="{{ url()->current() . "/recibos" }}">Recibos</a>    
   <a class="btn green" href="{{ url()->current() . "/mensualidades" }}">Historial Mensualidades</a>    
   <a class="btn orange" href="{{ url()->current() . "/nueva-mensualidad" }}">Nuevo Mensualidad</a>    
